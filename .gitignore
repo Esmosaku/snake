@@ -1,0 +1,6 @@
+snake
+snake_debug
+*.o
+*.out
+.DS_Store
+*.dSYM/
