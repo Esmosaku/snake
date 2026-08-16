@@ -102,8 +102,23 @@ bool snake_out_of_bounds(Point pos, int max_y, int max_x){
     return false;  
 }
 
-void snake_grow(Snake *snake, Point new_head_pos) {
+void snake_grow(Snake *snake) {
     //TODO: like snake_move but don't feee the tail - the snake gets one segment longer
+    SnakeSegment *curr_head = snake -> head;
+    Point next_pos = snake_next_head_pos(snake);
+    
+    SnakeSegment *new_head = seg_alloc();
+    if (new_head == NULL){
+        //TODO
+    }
+    new_head -> pos = next_pos;
+
+    snake -> head = new_head;
+    new_head -> prev = NULL;
+    new_head -> next = curr_head;
+    curr_head -> prev = new_head;
+    
+    snake -> length += 1;
 }
 
 /*
@@ -137,7 +152,25 @@ bool snake_check_self_collision(Point next_pos, const Snake *snake, bool will_gr
     return false;
 }
 
+Point snake_spawn_food(const Snake *snake, int max_y, int max_x){
+    Point food;
+
+    do{
+        food.x = rand() % max_x; //using (rand() % (max-min +1)) + min
+        food.y = rand() % max_y;
+    } while (snake_check_self_collision(food, snake, true));
+
+    return food;
+}
+
 void snake_destroy(Snake *snake) {
     //TODO: walk the list and seg_free() every node - this matters for Phase 2
     //the allocator needs every alloc paired with a free to prove it is not leaking
+    SnakeSegment *curr_head = snake -> head;
+
+    while (curr_head){
+        SnakeSegment *temp = curr_head -> next;
+        seg_free(curr_head);
+        curr_head = temp;
+    }
 }
