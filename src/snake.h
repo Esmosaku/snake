@@ -16,6 +16,7 @@ typedef enum {
 typedef struct SnakeSegment {
     Point pos;
     struct SnakeSegment *next;
+    struct SnakeSegment *prev; //using a doubly linked list instead to make the tail removal cleaner and constant.
 } SnakeSegment;
 
 typedef struct {
@@ -30,7 +31,7 @@ SnakeSegment *seg_alloc(void);
 void seg_free(SnakeSegment *seg);
 
 /* Core game logic to implement later*/
-void snake_init(Snake *snake, Point start_pos);
+void snake_init(Snake *snake, Point start_pos, Direction start_dir);
 void snake_move(Snake *snake);
 void snake_grow(Snake *snake, Point new_head_pos);
 bool snake_check_self_collision(const Snake *snake);
