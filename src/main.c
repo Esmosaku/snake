@@ -33,8 +33,17 @@ int main (void){
         clear();
         mvaddch(snake.head -> pos.y, snake.head -> pos.x, '@');
         mvprintw(0, 0, "dir: %d", pending_dir);
-        snake.dir = pending_dir;
-        snake_move(&snake);
+
+        Point next_pos = snake_next_head_pos(&snake);
+        bool will_grow = false; //hardcoded now, will change once I implement adding a food
+        
+        if (snake_out_of_bounds(next_pos, getmaxy(stdscr), getmaxx(stdscr)) || snake_check_self_collision(next_pos, &snake, will_grow)){
+            running = false;
+        }
+        else{
+            snake.dir = pending_dir;
+            snake_move(&snake);
+        }
         refresh();
 
         int ch = getch();

@@ -31,10 +31,13 @@ SnakeSegment *seg_alloc(void);
 void seg_free(SnakeSegment *seg);
 
 /* Core game logic to implement later*/
+Point snake_next_head_pos(const Snake *snake);
+bool points_equal(Point a, Point b);
 void snake_init(Snake *snake, Point start_pos, Direction start_dir);
 void snake_move(Snake *snake);
+bool snake_out_of_bounds(Point pos, int max_y, int max_x);
 void snake_grow(Snake *snake, Point new_head_pos);
-bool snake_check_self_collision(const Snake *snake);
+bool snake_check_self_collision(Point curr_pos, const Snake *snake, bool will_grow);
 void snake_destroy(Snake *snake);
 
 #endif
