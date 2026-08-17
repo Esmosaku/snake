@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "snake.h"
+#include "allocator.h"
+
 
 
 Direction direction_from_key(int ch, Direction current) {
@@ -29,6 +31,8 @@ int main (void){
 
     Direction pending_dir = DIR_RIGHT;
     
+    allocator_init();
+
     snake_init(&snake, test_point, pending_dir);
     Point food_pos = snake_spawn_food(&snake, getmaxy(stdscr), getmaxx(stdscr));
 

@@ -1,6 +1,8 @@
 #include "snake.h"
 #include <stdlib.h>
 
+#ifdef USE_MALLOC 
+
 SnakeSegment *seg_alloc(void){
     return malloc(sizeof(SnakeSegment));
 }
@@ -8,6 +10,8 @@ SnakeSegment *seg_alloc(void){
 void seg_free(SnakeSegment *seg) {
     free(seg);
 }
+
+#endif
 
 /*
 * Helper function to get the next position of the Snake before going into the snake_move function

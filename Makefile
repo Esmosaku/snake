@@ -7,6 +7,9 @@ SRC = src/*.c
 debug:
 	$(CC) $(CFLAGS) $(SANITIZE) -o snake_debug $(SRC) $(LDFLAGS)
 
+debug-malloc:
+	$(CC) $(CFLAGS) $(SANITIZE) -DUSE_MALLOC -o snake_debug_malloc $(SRC) $(LDFLAGS)
+
 release:
 	$(CC) $(CFLAGS) -O2 -o snake $(SRC) $(LDFLAGS)
 
