@@ -51,6 +51,7 @@ bool points_equal(Point a, Point b){
 */
 void snake_init(Snake *snake, Point start_pos, Direction start_dir){
     SnakeSegment *head_segment = seg_alloc();
+
     if (head_segment == NULL){
         //TODO
     }
@@ -63,6 +64,7 @@ void snake_init(Snake *snake, Point start_pos, Direction start_dir){
     head_segment -> prev = NULL;
 
     snake -> length = 1;
+    snake -> score = 0;
     snake -> dir = start_dir;
 }
 
@@ -127,6 +129,7 @@ void snake_grow(Snake *snake) {
     curr_head -> prev = new_head;
     
     snake -> length += 1;
+    snake -> score += 1;
 }
 
 /*

@@ -4,6 +4,7 @@
 #include <time.h>
 #include "snake.h"
 #include "allocator.h"
+#include "leaderboard.h"
 
 
 
@@ -16,6 +17,9 @@ Direction direction_from_key(int ch, Direction current) {
         default:        return current; //this means that if there is no key pressed, it would remain in the same direction
     }
 }
+
+ScoreEntry board[LEADERBOARD_MAX];
+int board_count = 0;
 
 int main (void){
     initscr();

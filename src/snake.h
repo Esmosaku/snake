@@ -22,6 +22,7 @@ typedef struct SnakeSegment {
 typedef struct {
     SnakeSegment *head;
     SnakeSegment *tail;
+    uint32_t score; //score incremented in snake_grow
     size_t length;
     Direction dir;
 } Snake;

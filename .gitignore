@@ -4,3 +4,4 @@ snake_debug
 *.out
 .DS_Store
 *.dSYM/
+leaderboard.dat
