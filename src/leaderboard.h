@@ -13,5 +13,7 @@ typedef struct {
 } ScoreEntry;
 
 int leaderboard_load(ScoreEntry entries[], int max_entries);
+void insert_score(ScoreEntry entries[], ScoreEntry new_entry, int *count);
+void leaderboard_save(ScoreEntry entries[], int count);
 
 #endif

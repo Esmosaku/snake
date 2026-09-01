@@ -2,10 +2,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "snake.h"
 #include "allocator.h"
 #include "leaderboard.h"
-
 
 
 Direction direction_from_key(int ch, Direction current) {
@@ -28,7 +28,7 @@ int main (void){
     curs_set(0);
     srand(time(NULL));
     keypad(stdscr, TRUE);
-    nodelay(stdscr, TRUE);
+    nodelay(stdscr, FALSE);
 
     Snake snake;
     Point test_point = {.x = 10, .y = 10};
@@ -36,14 +36,24 @@ int main (void){
     Direction pending_dir = DIR_RIGHT;
     
     allocator_init();
+    board_count = leaderboard_load(board, LEADERBOARD_MAX);
 
     snake_init(&snake, test_point, pending_dir);
     Point food_pos = snake_spawn_food(&snake, getmaxy(stdscr), getmaxx(stdscr));
 
     bool running = true;
+    mvprintw(1, 0, "Score so far");
+    for(int i = 0; i < board_count; i++){
+        mvprintw(2+i, 0, "%i. %u", (i+1), board[i].score);
+        refresh();
+    }
+
+    getch();
+    nodelay(stdscr, TRUE);
 
     while (running){
         clear();
+        mvprintw(0,0, "Score: %u", snake.score);
         SnakeSegment *seg = snake.head;
         while (seg != NULL){
             mvaddch(seg-> pos.y, seg -> pos.x, '@');
@@ -86,6 +96,13 @@ int main (void){
     }
 
     snake_destroy(&snake);
+    ScoreEntry new_entry;
+    strcpy(new_entry.name, "Player");
+    new_entry.score = snake.score;
+    new_entry.timestamp = time(NULL);
+    insert_score(board, new_entry, &board_count);
+    leaderboard_save(board, board_count);
+
     endwin();
     return 0;
 }
