@@ -10,6 +10,9 @@
 #define WINNER_P1 2
 #define WINNER_DRAW 3
 
+#define BOARD_WIDTH 100
+#define BOARD_HEIGHT 30
+
 #define PORT 3000
 
 typedef struct{

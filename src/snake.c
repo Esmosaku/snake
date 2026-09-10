@@ -165,17 +165,18 @@ bool snake_check_self_collision(Point next_pos, const Snake *snake, bool will_gr
 
 /*
 * Creates the point of the snake's food in the terminal.
+* Included situation for when it is multiplayer. snake2 will always be NULL for single player
 * @param *snake the snake pointer of the Snake struct
 * @param max_y the y axis limit of the food's random point
 * @param max_x the x axis limit of the food's random point.
 */
-Point snake_spawn_food(const Snake *snake, int max_y, int max_x){
+Point snake_spawn_food(const Snake *snake, const Snake *snake2, int max_y, int max_x){
     Point food;
 
     do{
         food.x = rand() % max_x; //using (rand() % (max-min +1)) + min
         food.y = rand() % max_y;
-    } while (snake_check_self_collision(food, snake, true));
+    } while (snake_check_self_collision(food, snake, true) || (snake2 != NULL && snake_check_self_collision(food, snake2, true)));
 
     return food;
 }

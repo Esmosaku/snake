@@ -39,7 +39,7 @@ int main (void){
     board_count = leaderboard_load(board, LEADERBOARD_MAX);
 
     snake_init(&snake, test_point, pending_dir);
-    Point food_pos = snake_spawn_food(&snake, getmaxy(stdscr), getmaxx(stdscr));
+    Point food_pos = snake_spawn_food(&snake, NULL, getmaxy(stdscr), getmaxx(stdscr));
 
     bool running = true;
     mvprintw(1, 0, "Score so far");
@@ -78,7 +78,7 @@ int main (void){
         else if (will_grow){
             //mvprintw(1, 0, "next: (%d,%d) food: (%d,%d) grow: %d", next_pos.x, next_pos.y, food_pos.x, food_pos.y, will_grow);
             snake_grow(&snake);
-            food_pos = snake_spawn_food(&snake, getmaxy(stdscr), getmaxx(stdscr));
+            food_pos = snake_spawn_food(&snake, NULL, getmaxy(stdscr), getmaxx(stdscr));
         }
         else{
             snake_move(&snake);

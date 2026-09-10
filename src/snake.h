@@ -40,6 +40,6 @@ bool snake_out_of_bounds(Point pos, int max_y, int max_x);
 void snake_grow(Snake *snake);
 bool snake_check_self_collision(Point curr_pos, const Snake *snake, bool will_grow);
 void snake_destroy(Snake *snake);
-Point snake_spawn_food(const Snake *snake, int max_y, int max_x);
+Point snake_spawn_food(const Snake *snake, const Snake *snake2, int max_y, int max_x);
 
 #endif
