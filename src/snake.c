@@ -1,5 +1,6 @@
 #include "snake.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 #ifdef USE_MALLOC 
 
@@ -53,7 +54,8 @@ void snake_init(Snake *snake, Point start_pos, Direction start_dir){
     SnakeSegment *head_segment = seg_alloc();
 
     if (head_segment == NULL){
-        //TODO
+        printf("Failed to allocate initial snake segment - out of memory.\n");
+        exit(1);
     }
     head_segment -> pos = start_pos;
 
@@ -80,7 +82,8 @@ void snake_move(Snake *snake){
     
     SnakeSegment *new_head = seg_alloc();
     if (new_head == NULL){
-        //TODO
+        printf("Allocator exhausted, max snake length reached.\n");
+        exit(1);
     }
     new_head -> pos = next_pos;
 
@@ -119,7 +122,8 @@ void snake_grow(Snake *snake) {
     
     SnakeSegment *new_head = seg_alloc();
     if (new_head == NULL){
-        //TODO
+        printf("Allocator exhausted, max snake length reached.\n");
+        exit(1);
     }
     new_head -> pos = next_pos;
 

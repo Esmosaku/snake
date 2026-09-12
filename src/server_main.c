@@ -26,7 +26,7 @@ int main(void){
     bind(socketfd, (struct sockaddr *)&addr, sizeof(addr));
 
     listen(socketfd, 2);
-
+    
     int client1_fd = accept(socketfd, NULL, NULL);
     if (client1_fd == -1){
         return 0;
