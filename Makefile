@@ -18,7 +18,7 @@ server:
 	$(CC) $(CFLAGS) $(SANITIZE) -o snake_server src/server_main.c $(SHARED_SRC)
 
 client:
-	$(CC) $(CFLAGS) $(SANITIZE) -o snake_client src/client_main.c $(SHARED_SRC)
+	$(CC) $(CFLAGS) $(SANITIZE) -o snake_client src/client_main.c $(SHARED_SRC) $(LDFLAGS)
 
 clean:
 	rm -f snake snake_debug

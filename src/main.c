@@ -92,7 +92,7 @@ int main (void){
             pending_dir = direction_from_key(ch, pending_dir);
         }
 
-        napms(150); //sleeps ~100ms
+        napms(180); //sleeps ~100ms
     }
 
     snake_destroy(&snake);
