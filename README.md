@@ -5,10 +5,10 @@ A terminal Snake game built in four phases, each demonstrating a core systems pr
 ## Phases
 
 **Phase 1 - Core Game**
-Classic Snake in C using a doubly linked list for the snake's body, rendered via ncurses. Includes wall/self-collision detection and food-based growth.
+Classic Snake in C, using a doubly linked list for the snake's body and rendering via ncurses. Includes wall/self-collision detection and food-based growth.
 
 **Phase 2 - Custom Memory Allocator**
-Replaces `malloc`/`free` with a hand-built slab allocator: a fixed-capacity pool (3,000 nodes) with an intrusive free list, achieving O(1) allocation and deallocation with zero fragmentation. Switchable back to `malloc` via a `USE_MALLOC` compile-time flag for A/B correctness testing.
+Replaces `malloc`/`free` with a hand-built slab allocator: a fixed-capacity pool (3,000 nodes) with an intrusive free list, achieving O(1) allocation and deallocation with zero fragmentation, switchable back to `malloc` via a `USE_MALLOC` compile-time flag for A/B correctness testing.
 
 **Phase 3 — Persistent Leaderboard**
 Binary file I/O (`fread`/`fwrite` on fixed-width structs) implements a top-10 leaderboard that persists across runs, with sorted insertion and graceful handling of a missing/first-run file.
@@ -54,3 +54,8 @@ make client         # multiplayer client
 - clang (or any C11 compiler)
 - ncurses
 - macOS/Linux (POSIX sockets)
+
+## Development Notes
+
+I used Claude (Anthropic) throughout this project as a learning aid, primarily to explain unfamiliar C/systems concepts (pointers, custom allocators, socket APIs) and to review my code for bugs by pointing out problems without directly
+fixing them. For new library/API syntax that I had not used before (ncurses setup, socket configuration), I sometimes used AI-provided code directly rather than writing it from scratch. However, all core game logic, the custom allocator's design, collision/networking logic, and debugging of the harder bugs were worked through and written by me.
